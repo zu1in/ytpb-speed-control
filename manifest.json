@@ -1,0 +1,62 @@
+{
+    "manifest_version": 2,
+    "name": "YouTube playback speed control",
+    "short_name": "YPBS",
+    "description": "This extension allows you to change YouTube video playback speed the current page",
+    "version": "0.1",
+    "author": [
+        {
+            "name": "Ivan Baydanutsa",
+            "email": "zulin@in-tag.com"
+        }
+    ],
+    "browser_action": {
+        "default_icon": "img/icon128.png",
+        "default_title": "Change speed of YouTube videos on the fly"
+    },
+    "permissions": [
+        "tabs",
+        "http://*/",
+        "https://*/"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "all_frames": true
+        }
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "web_accessible_resources": [
+        "controller.js"
+    ],
+    "commands": {
+        "speedUp": {
+            "description": "Speed up playback",
+            "suggested_key": {
+                "default": "Alt+Period"
+            }
+        },
+        "slowDown": {
+            "description": "Slow down playback",
+            "suggested_key": {
+                "default": "Alt+Comma"
+            }
+        }
+    },
+    "icons": {
+        "128": "img/icon128.png"
+    },
+    "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
+    }
+}
