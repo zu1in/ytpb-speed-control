@@ -36,7 +36,8 @@
         ]
     },
     "web_accessible_resources": [
-        "controller.js"
+        "controller.js",
+        "info.css"
     ],
     "commands": {
         "speedUp": {

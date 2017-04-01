@@ -1,7 +1,9 @@
+const log = console.log;
+
 window.addEventListener("YTPBAction", function (e) {
     var cmd = e.detail.action;
 
-    console.log("⏩ YTPBAction received: " + cmd);
+    log("⏩ YTPBAction received: " + cmd);
 
     var player = document.querySelector(".html5-video-player");
     if (player) {
@@ -15,8 +17,17 @@ window.addEventListener("YTPBAction", function (e) {
 
         var newRate = rates[curRateInd];
         player.setPlaybackRate(newRate);
-        console.log("⏩ new rate: " + player.getPlaybackRate());
+        log("⏩ new rate: " + player.getPlaybackRate());
+
+        var info = document.getElementById("ytpb-info");
+        var text = document.getElementById("ytpb-text");
+        if (info && text) {
+            text.innerHTML = "×" + newRate;
+            info.classList.remove("grow");
+            info.offsetWidth;// force reflow
+            info.classList.add("grow");
+        }
     }
 });
 
-console.log("⏩ INJECT complete.");
+log("⏩ INJECT complete.");

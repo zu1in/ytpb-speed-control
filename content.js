@@ -1,21 +1,47 @@
+const log = console.log;
+
 var Extension = function () {
 
     Extension.prototype.injectController = function () {
         var controllerPresent = document.getElementById("YPBSController");
         if (controllerPresent) {
-            console.log("⏩ CONTROLLER is present. Skipping inject.");
+            log("⏩ CONTROLLER is present. Skipping inject.");
             return;
         }
 
         var p = document.querySelector('.html5-video-player');
         if (p) {
-            var s = document.createElement('script');
-            s.id = "YPBSController";
-            s.src = chrome.extension.getURL('controller.js');
-            s.onload = function () {
-                console.log("⏩ CONTROLLER script loaded.");
+            var script = document.createElement('script');
+            script.id = "YPBSController";
+            script.src = chrome.extension.getURL('controller.js');
+            script.onload = function () {
+                log("⏩ CONTROLLER script loaded.");
             };
-            (document.head || document.documentElement).appendChild(s);
+            (document.head || document.documentElement).appendChild(script);
+
+            // CSS
+            var css = document.createElement('link');
+            css.href = chrome.extension.getURL('info.css');
+            css.rel = "stylesheet"; 
+            css.type = "text/css"; 
+            (document.head || document.documentElement).appendChild(css);
+
+            // HTML
+            var container = document.createElement('div');
+            container.id = "ytpb-info-container";
+            // var div = document.createElement('div');
+            // div.id = "ytpb-info";
+            // var p = document.createElement('p');
+            // p.id = "ytpb-text";
+            // p.appendChild(document.createTextNode("×2"));
+            // div.appendChild(p);
+            // container.appendChild(div);
+
+            container.innerHTML = "<div id='ytpb-info'><p id='ytpb-text'>00</p></div>";
+
+            document.body.insertBefore(container, document.body.childNodes[0]);
+            
+            log("⏩ INJECT COMPLETE ***");            
         }
     };
 
@@ -29,11 +55,11 @@ var Extension = function () {
 var ExtensionInstance = new Extension();
 
 if (ExtensionInstance) {
-    console.log("⏩ CONTENT script init OK.");
+    log("⏩ CONTENT script init OK.");
 
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         // NOTE: there may be many of these messages. As many as number of iframes in the document.
-        console.log("⏩ onMessage: request = '" + request.action + "' sender = '" + sender.tab + "'");
+        log("⏩ onMessage: request = '" + request.action + "' sender = '" + sender.tab + "'");
 
         if (request.action == 'speedUp' || request.action == 'slowDown') {
             ExtensionInstance.sendCommand(request.action);
