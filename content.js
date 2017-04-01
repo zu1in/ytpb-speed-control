@@ -11,6 +11,7 @@ var Extension = function () {
 
         var p = document.querySelector('.html5-video-player');
         if (p) {
+            // JS
             var script = document.createElement('script');
             script.id = "YPBSController";
             script.src = chrome.extension.getURL('controller.js');
@@ -29,19 +30,10 @@ var Extension = function () {
             // HTML
             var container = document.createElement('div');
             container.id = "ytpb-info-container";
-            // var div = document.createElement('div');
-            // div.id = "ytpb-info";
-            // var p = document.createElement('p');
-            // p.id = "ytpb-text";
-            // p.appendChild(document.createTextNode("×2"));
-            // div.appendChild(p);
-            // container.appendChild(div);
-
             container.innerHTML = "<div id='ytpb-info'><p id='ytpb-text'>00</p></div>";
-
             document.body.insertBefore(container, document.body.childNodes[0]);
             
-            log("⏩ INJECT COMPLETE ***");            
+            log("⏩ INJECT COMPLETE");            
         }
     };
 

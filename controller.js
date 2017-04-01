@@ -32,4 +32,4 @@ window.addEventListener("YTPBAction", function (e) {
     }
 });
 
-log("⏩ INJECT complete.");
+log("⏩ INJECT loaded.");
