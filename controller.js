@@ -6,7 +6,9 @@ window.addEventListener("YTPBAction", function (e) {
     log("⏩ YTPBAction received: " + cmd);
 
     var player = document.querySelector(".html5-video-player");
-    if (player) {
+    var isCurrentlyPlaying = player ? player.classList.contains("playing-mode") : false;
+
+    if (player && isCurrentlyPlaying) {
         var rates = player.getAvailablePlaybackRates();
         var curRateInd = rates.indexOf(player.getPlaybackRate());
 
