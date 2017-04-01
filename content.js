@@ -23,8 +23,8 @@ var Extension = function () {
             // CSS
             var css = document.createElement('link');
             css.href = chrome.extension.getURL('info.css');
-            css.rel = "stylesheet"; 
-            css.type = "text/css"; 
+            css.rel = "stylesheet";
+            css.type = "text/css";
             (document.head || document.documentElement).appendChild(css);
 
             // HTML
@@ -32,8 +32,8 @@ var Extension = function () {
             container.id = "ytpb-info-container";
             container.innerHTML = "<div id='ytpb-info'><p id='ytpb-text'>00</p></div>";
             document.body.insertBefore(container, document.body.childNodes[0]);
-            
-            log("⏩ INJECT COMPLETE");            
+
+            log("⏩ INJECT COMPLETE");
         }
     };
 
@@ -51,7 +51,8 @@ if (ExtensionInstance) {
 
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         // NOTE: there may be many of these messages. As many as number of iframes in the document.
-        log("⏩ onMessage: request = '" + request.action + "' sender = '" + sender.tab + "'");
+        var msgSource = sender.tab ? "content script: " + sender.tab.url : "extension";
+        log("⏩ onMessage: request = '" + request.action + "' sender = '" + msgSource + "'");
 
         if (request.action == 'speedUp' || request.action == 'slowDown') {
             ExtensionInstance.sendCommand(request.action);
