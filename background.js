@@ -1,11 +1,15 @@
 const log = console.log;
 
-chrome.tabs.onUpdated.addListener(function (tabId, info) {
-    if (info.status == "complete") {
-        chrome.tabs.sendMessage(tabId, { action: 'inject' });
-        log("⏩ tab is LOADED!");
+chrome.webNavigation.onCompleted.addListener(function (details) {
+    chrome.tabs.sendMessage(details.tabId, { action: 'inject' });
+    log("⏩ iframe LOADED");
+}, {
+        url: [{
+            // make sure we're targeting youtube player only
+            hostContains: '.youtube.'
+        }]
     }
-});
+);
 
 chrome.commands.onCommand.addListener(function (command) {
 
