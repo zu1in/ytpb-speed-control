@@ -1,7 +1,7 @@
 const log = console.log;
 
 chrome.webNavigation.onCompleted.addListener(function (details) {
-    chrome.tabs.sendMessage(details.tabId, { action: 'inject' });
+    chrome.tabs.sendMessage(details.tabId, { action: 'inject', origin: 'frameLoaded' });
     log("⏩ iframe LOADED");
 }, {
         url: [{
@@ -10,6 +10,13 @@ chrome.webNavigation.onCompleted.addListener(function (details) {
         }]
     }
 );
+
+chrome.tabs.onUpdated.addListener(function (tabId, info) {
+    if (info.status == "complete") {
+        chrome.tabs.sendMessage(tabId, { action: 'inject', origin: 'tabUpdated' });
+        log("⏩ tab is LOADED!");
+    }
+});
 
 chrome.commands.onCommand.addListener(function (command) {
 
