@@ -3,7 +3,7 @@
     "name": "YouTube PlayBack speed control",
     "short_name": "YTPB",
     "description": "This extension allows you to change YouTube video playback speed the current page",
-    "version": "0.2",
+    "version": "0.3",
     "author": [
         {
             "name": "Ivan Baydanutsa",

@@ -32,7 +32,8 @@
                 var container = document.createElement('div');
                 container.id = "ytpb-info-container";
                 container.innerHTML = "<div id='ytpb-info'><p id='ytpb-text'>00</p></div>";
-                document.body.insertBefore(container, document.body.childNodes[0]);
+                // document.body.insertBefore(container, document.body.childNodes[0]);
+                p.appendChild(container);
 
                 log("⏩ INJECT COMPLETE");
             } else {
