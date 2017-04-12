@@ -61,12 +61,10 @@
                 ExtensionInstance.sendCommand(request.action);
             } else
                 if (request.action == 'inject') {
-                    log("⏩ INJECTing from ", request.origin);
+                    log("⏩ INJECT @ '", request.origin, "'");
                     ExtensionInstance.injectController();
                 }
         });
-    } else {
-        log("⏩ Something went wrong :(");
     }
 
 }());

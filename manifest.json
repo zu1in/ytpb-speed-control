@@ -15,7 +15,6 @@
         "default_title": "Change speed of YouTube videos on the fly"
     },
     "permissions": [
-        "webNavigation",
         "tabs",
         "http://*/",
         "https://*/"
